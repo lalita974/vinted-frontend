@@ -10,8 +10,9 @@
   box-sizing: border-box;
 }
 
-Link:link {
+a {
   text-decoration: none;
+  color: inherit;
 }
 
 button {
@@ -85,7 +86,6 @@ img {
   height: 455px;
   width: 1903px;
   object-fit: cover;
-  /* position: relative; */
 }
 
 .offer-picture {
@@ -102,7 +102,7 @@ img {
 .bloc-superpose {
   height: 270px;
   width: 410px;
-  border: 1px solid #000;
+  border: 1px solid #c9c9c9;
   border-radius: 5px;
   font-size: 34px;
   line-height: 35px;
@@ -111,12 +111,15 @@ img {
   justify-content: space-around;
   padding: 20px;
   background-color: #fff;
-  /* position: absolute; */
+  position: absolute;
+  bottom: 110px;
+  left: 310px;
 }
 
-/* .bloc-endessous {
+.bloc-endessous {
   position: relative;
-} */
+  margin-bottom: 40px;
+}
 
 .bouton-bleu-home {
   background-color: #2cb1ba;
@@ -135,7 +138,7 @@ img {
   margin: 0 auto;
 }
 
-article {
+.affichage-home a {
   width: calc((100% - 40px) / 5);
   margin-bottom: 40px;
 }
