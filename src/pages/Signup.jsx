@@ -7,9 +7,10 @@ const Signup = () => {
   const [password, setPassword] = useState();
   const [newsletter, setNewsletter] = useState(false);
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (event) => {
+    event.preventDefault();
     try {
-      await axios.post(
+      const result = await axios.post(
         "https://lereacteur-vinted-api.herokuapp.com/user/signup",
         {
           email: email,
@@ -18,6 +19,7 @@ const Signup = () => {
           newsletter: newsletter,
         }
       );
+      console.log(result);
     } catch (error) {
       console.log(error.response);
     }
@@ -32,16 +34,19 @@ const Signup = () => {
             type="text"
             placeholder="Nom d&#39;utilisateur"
             onChange={(event) => setUsername(event.target.value)}
+            required
           />
           <input
             type="email"
             placeholder="Email"
             onChange={(event) => setEmail(event.target.value)}
+            required
           />
           <input
             type="password"
             placeholder="Mot de passe"
             onChange={(event) => setPassword(event.target.value)}
+            required
           />
         </div>
         <div>
