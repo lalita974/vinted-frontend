@@ -1,10 +1,13 @@
 import "./App.css";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 //Pages
 import Home from "./pages/Home";
 import Offer from "./pages/Offer";
-import Header from "./pages/Header";
+import Signup from "./pages/Signup";
+
+//Components
+import Header from "./components/Header";
 
 //Icones
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -22,7 +25,8 @@ const App = () => {
         {/* Pour chaque route, je précise son chemin et le composant qu'elle doit afficher */}
         <Route path="/" element={<Home />} />
         {/* Cette route attend un params dans son URL */}
-        <Route path="/offer:id" element={<Offer />} />
+        <Route path="/offer/:id" element={<Offer />} />
+        <Route path="/signup" element={<Signup />} />
       </Routes>
     </Router>
   );

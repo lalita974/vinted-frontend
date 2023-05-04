@@ -1,3 +1,5 @@
+@import url(./fonts/stylesheet.css);
+
 /* GENERAL */
 
 .app {
@@ -33,7 +35,7 @@ input {
   padding: 10px 0 10px 0;
 }
 
-/* HEADER */
+/* COMPONENT HEADER */
 
 header div {
   display: flex;
@@ -80,7 +82,7 @@ header input {
   width: 595px;
 }
 
-/* HOME */
+/* PAGE HOME */
 
 img {
   height: 455px;
@@ -158,4 +160,96 @@ img {
 .taille-marque {
   font-size: 12px;
   color: #999999;
+}
+
+/* PAGE OFFER */
+
+.page-offer {
+  background-color: #ebedee;
+}
+
+.page-offer-container {
+  width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-around;
+  padding: 50px;
+}
+
+.page-offer img {
+  height: 600px;
+  width: 450px;
+}
+
+.page-offer-description {
+  height: 600px;
+  width: 450px;
+  background-color: #fff;
+  padding: 35px;
+}
+
+.page-offer-description-bloc-1 {
+  margin-bottom: 30px;
+  border-bottom: #d1d1d1 1px solid;
+  padding-bottom: 50px;
+}
+
+.page-offer-price {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.page-offer-detail {
+  display: flex;
+  justify-content: space-between;
+  padding-right: 30px;
+  line-height: 20px;
+}
+
+.page-offer-detail :first-child {
+  color: #999999;
+}
+
+.page-offer-detail :last-child {
+  font-weight: bold;
+}
+
+h4 {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+h5 {
+  font-size: 16px;
+}
+
+.page-offer-owner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 20px 0px;
+}
+
+.page-offer-owner img {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+}
+
+.page-offer-button {
+  background-color: #2cb1ba;
+  color: white;
+  border-radius: 5px;
+  font-size: 16px;
+  line-height: 10px;
+  height: 35px;
+  width: calc(100% - 50px);
+  align-self: center;
+  margin-top: 80px;
+}
+
+.page-offer-description-bloc-2 {
+  display: flex;
+  flex-direction: column;
 }
