@@ -1,16 +1,21 @@
 import axios from "axios";
 import { useState } from "react";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-const Signup = () => {
+const Signup = (props) => {
   const [username, setUsername] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [newsletter, setNewsletter] = useState(false);
+  const [errorMessage, setErrorMessage] = useState();
+  const { handleToken } = props;
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const result = await axios.post(
+      const response = await axios.post(
         "https://lereacteur-vinted-api.herokuapp.com/user/signup",
         {
           email: email,
@@ -19,9 +24,15 @@ const Signup = () => {
           newsletter: newsletter,
         }
       );
-      console.log(result);
+      // console.log(response.data);
+      if (response.data.token) {
+        handleToken(response.data.token);
+        navigate("/");
+      }
     } catch (error) {
-      console.log(error.response);
+      if (error.response.data.message) {
+        setErrorMessage(error.response.data.message);
+      }
     }
   };
 
@@ -33,29 +44,39 @@ const Signup = () => {
           <input
             type="text"
             placeholder="Nom d&#39;utilisateur"
-            onChange={(event) => setUsername(event.target.value)}
-            required
+            onChange={(event) => {
+              setUsername(event.target.value);
+              setErrorMessage("");
+            }}
+            value={username}
           />
           <input
             type="email"
             placeholder="Email"
-            onChange={(event) => setEmail(event.target.value)}
-            required
+            onChange={(event) => {
+              setEmail(event.target.value);
+              setErrorMessage("");
+            }}
+            value={email}
           />
           <input
             type="password"
             placeholder="Mot de passe"
-            onChange={(event) => setPassword(event.target.value)}
-            required
+            onChange={(event) => {
+              setPassword(event.target.value);
+              setErrorMessage("");
+            }}
+            value={password}
           />
         </div>
         <div>
           <label>
             <input
               type="checkbox"
-              onClick={() => {
+              onChange={() => {
                 setNewsletter(!newsletter);
               }}
+              checked={newsletter}
             />
             S&#39;inscrire à notre newsletter
           </label>
@@ -65,8 +86,10 @@ const Signup = () => {
             avoir au moins 18 ans.
           </p>
         </div>
+
         <button type="submit">S&#39;inscrire</button>
-        <a href="#">Tu as déjà un compte ? Connecte-toi !</a>
+        {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
+        <Link to="/login">Tu as déjà un compte ? Connecte-toi !</Link>
       </form>
     </div>
   );
