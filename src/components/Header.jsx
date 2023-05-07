@@ -3,7 +3,7 @@ import logo from "../assets/logo-vinted.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Header = (props) => {
-  const { token, handleToken } = props;
+  const { token, handleToken, visible, setVisible } = props;
   return (
     <header>
       <div className="container">
@@ -35,9 +35,14 @@ const Header = (props) => {
             <Link to="/signup">
               <button className="bouton-blanc">S&#39;inscrire</button>
             </Link>
-            <Link to="/login">
-              <button className="bouton-blanc">Se connecter</button>
-            </Link>
+            <button
+              className="bouton-blanc"
+              onClick={() => {
+                setVisible(!visible);
+              }}
+            >
+              Se connecter
+            </button>
           </div>
         )}
 

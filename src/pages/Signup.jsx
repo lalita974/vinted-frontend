@@ -1,6 +1,5 @@
 import axios from "axios";
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 const Signup = (props) => {
@@ -9,7 +8,7 @@ const Signup = (props) => {
   const [password, setPassword] = useState();
   const [newsletter, setNewsletter] = useState(false);
   const [errorMessage, setErrorMessage] = useState();
-  const { handleToken } = props;
+  const { handleToken, visible, setVisible } = props;
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
@@ -89,7 +88,13 @@ const Signup = (props) => {
 
         <button type="submit">S&#39;inscrire</button>
         {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
-        <Link to="/login">Tu as déjà un compte ? Connecte-toi !</Link>
+        <button
+          onClick={() => {
+            setVisible(!visible);
+          }}
+        >
+          Tu as déjà un compte ? Connecte-toi !
+        </button>
       </form>
     </div>
   );
