@@ -3,21 +3,37 @@ import logo from "../assets/logo-vinted.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Header = (props) => {
-  const { token, handleToken, visible, setVisible } = props;
+  const { token, handleToken, visible, setVisible, descending, setDescending } =
+    props;
   return (
     <header>
       <div className="container">
         <Link to="/">
           <img src={logo} alt="vinted" />
         </Link>
-        <div className="search">
-          <p>
-            <FontAwesomeIcon
-              icon="fa-solid fa-magnifying-glass"
-              style={{ color: "#939393" }}
-            />
-          </p>
-          <input type="text" placeholder="Rechercher des articles" />
+        <div>
+          <div className="search">
+            <p>
+              <FontAwesomeIcon
+                icon="fa-solid fa-magnifying-glass"
+                style={{ color: "#939393" }}
+              />
+            </p>
+            <input type="text" placeholder="Rechercher des articles" />
+          </div>
+          <div>
+            <label className="toggle">
+              <input
+                className="toggle__input"
+                type="checkbox"
+                id="descending-button"
+                onClick={() => {
+                  setDescending(!descending);
+                }}
+              />
+              <div className="toggle__fill"></div>
+            </label>
+          </div>
         </div>
 
         {token ? (

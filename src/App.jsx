@@ -20,6 +20,7 @@ library.add(faMagnifyingGlass);
 const App = () => {
   const [token, setToken] = useState(Cookies.get("tokenVinted") || null);
   const [visible, setVisible] = useState(false);
+  const [descending, setDescending] = useState(false);
 
   const handleToken = (token) => {
     if (token) {
@@ -41,11 +42,13 @@ const App = () => {
         handleToken={handleToken}
         visible={visible}
         setVisible={setVisible}
+        descending={descending}
+        setDescending={setDescending}
       />
       {/* Le composant Routes doit contenir toutes mes Route il affiche un composant à la fois */}
       <Routes>
         {/* Pour chaque route, je précise son chemin et le composant qu'elle doit afficher */}
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home descending={descending} />} />
         {/* Cette route attend un params dans son URL */}
         <Route path="/offer/:id" element={<Offer />} />
         <Route

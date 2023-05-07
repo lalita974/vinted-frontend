@@ -3,24 +3,33 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import homePicture from "../assets/home-image.jpg";
 
-const Home = () => {
+const Home = (props) => {
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
+  const { descending } = props;
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(
-          "https://lereacteur-vinted-api.herokuapp.com/offers"
-        );
-        setData(response.data);
-        setIsLoading(false);
+        if (descending) {
+          let response = await axios.get(
+            "https://lereacteur-vinted-api.herokuapp.com/offers?sort=price-desc"
+          );
+          setData(response.data);
+          setIsLoading(false);
+        } else {
+          let response = await axios.get(
+            "https://lereacteur-vinted-api.herokuapp.com/offers?sort=price-asc"
+          );
+          setData(response.data);
+          setIsLoading(false);
+        }
       } catch (error) {
         console.log(error.response);
       }
     };
     fetchData();
-  }, []);
+  }, [descending]);
 
   return isLoading ? (
     <span>En cours de chargement...</span>
