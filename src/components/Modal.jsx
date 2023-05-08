@@ -50,11 +50,9 @@ const Modal = (props) => {
           onClick={() => {
             setVisible(false);
           }}
-        >
-          X
-        </button>
+        ></button>
         <h1>Se connecter</h1>
-        <form onSubmit={handleSubmit}>
+        <form className="modal-form" onSubmit={handleSubmit}>
           <div>
             <input
               type="email"
@@ -75,18 +73,22 @@ const Modal = (props) => {
               value={password}
             />
           </div>
-
-          <button type="submit">Se connecter</button>
-          {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
-          <Link to="/signup">
-            <button
-              onClick={() => {
-                setVisible(!visible);
-              }}
-            >
-              Pas encore de compte ? Inscris-toi !
+          <div className="modal-buttons">
+            <button className="modal-form-button" type="submit">
+              Se connecter
             </button>
-          </Link>
+            {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
+            <Link to="/signup">
+              <button
+                className="modal-form-redirection"
+                onClick={() => {
+                  setVisible(!visible);
+                }}
+              >
+                Pas encore de compte ? Inscris-toi !
+              </button>
+            </Link>
+          </div>
         </form>
       </div>
     </div>

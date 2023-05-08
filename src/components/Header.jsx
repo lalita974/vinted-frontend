@@ -73,6 +73,7 @@ const Header = (props) => {
         {token ? (
           <div>
             <button
+              className="bouton-rouge"
               onClick={() => {
                 handleToken(null);
               }}

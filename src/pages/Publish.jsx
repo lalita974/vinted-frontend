@@ -42,18 +42,18 @@ const Publish = (props) => {
   };
   return (
     <section>
-      <div className="container">
+      <div className="publish-container">
+        <h1>Vends ton article</h1>
         <form onSubmit={handleSubmit}>
-          <div>
-            <input
-              type="file"
-              onChange={(event) => {
-                setFile(event.target.files[0]);
-              }}
-            />
-          </div>
-          <div>
-            <label>
+          <input
+            className="file"
+            type="file"
+            onChange={(event) => {
+              setFile(event.target.files[0]);
+            }}
+          />
+          <div className="bloc">
+            <label className="interieur-bloc">
               Titre
               <input
                 type="text"
@@ -63,7 +63,7 @@ const Publish = (props) => {
                 }}
               />
             </label>
-            <label>
+            <label className="interieur-bloc">
               Décris ton article
               <input
                 type="text"
@@ -74,8 +74,8 @@ const Publish = (props) => {
               />
             </label>
           </div>
-          <div>
-            <label>
+          <div className="bloc">
+            <label className="interieur-bloc">
               Marque
               <input
                 type="text"
@@ -85,7 +85,7 @@ const Publish = (props) => {
                 }}
               />
             </label>
-            <label>
+            <label className="interieur-bloc">
               Taille
               <input
                 type="text"
@@ -95,7 +95,7 @@ const Publish = (props) => {
                 }}
               />
             </label>
-            <label>
+            <label className="interieur-bloc">
               Couleur
               <input
                 type="text"
@@ -105,7 +105,7 @@ const Publish = (props) => {
                 }}
               />
             </label>
-            <label>
+            <label className="interieur-bloc">
               Etat
               <input
                 type="text"
@@ -115,7 +115,7 @@ const Publish = (props) => {
                 }}
               />
             </label>
-            <label>
+            <label className="interieur-bloc">
               Lieu
               <input
                 type="text"
@@ -126,23 +126,21 @@ const Publish = (props) => {
               />
             </label>
           </div>
-          <div>
-            <label>
+          <div className="bloc">
+            <label className="interieur-bloc">
               Prix
               <input
-                type="number"
+                type="text"
                 placeholder="ex: 0.00€"
                 onChange={(event) => {
                   setPrice(event.target.value);
                 }}
               />
             </label>
-            <label>
-              <input type="checkbox" />
-              Je suis intéressé(e) par les échanges
-            </label>
           </div>
-          <button type="submit">Ajouter</button>
+          <div className="publish-button">
+            <button type="submit">Ajouter</button>
+          </div>
         </form>
       </div>
     </section>

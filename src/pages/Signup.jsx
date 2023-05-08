@@ -38,37 +38,35 @@ const Signup = (props) => {
   return (
     <div>
       <h1>S&#39;inscrire</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <input
-            type="text"
-            placeholder="Nom d&#39;utilisateur"
-            onChange={(event) => {
-              setUsername(event.target.value);
-              setErrorMessage("");
-            }}
-            value={username}
-          />
-          <input
-            type="email"
-            placeholder="Email"
-            onChange={(event) => {
-              setEmail(event.target.value);
-              setErrorMessage("");
-            }}
-            value={email}
-          />
-          <input
-            type="password"
-            placeholder="Mot de passe"
-            onChange={(event) => {
-              setPassword(event.target.value);
-              setErrorMessage("");
-            }}
-            value={password}
-          />
-        </div>
-        <div>
+      <form className="signup-form" onSubmit={handleSubmit}>
+        <input
+          type="text"
+          placeholder="Nom d&#39;utilisateur"
+          onChange={(event) => {
+            setUsername(event.target.value);
+            setErrorMessage("");
+          }}
+          value={username}
+        />
+        <input
+          type="email"
+          placeholder="Email"
+          onChange={(event) => {
+            setEmail(event.target.value);
+            setErrorMessage("");
+          }}
+          value={email}
+        />
+        <input
+          type="password"
+          placeholder="Mot de passe"
+          onChange={(event) => {
+            setPassword(event.target.value);
+            setErrorMessage("");
+          }}
+          value={password}
+        />
+        <div className="signup-checkbox">
           <label>
             <input
               type="checkbox"
@@ -86,9 +84,12 @@ const Signup = (props) => {
           </p>
         </div>
 
-        <button type="submit">S&#39;inscrire</button>
+        <button className="signup-form-button" type="submit">
+          S&#39;inscrire
+        </button>
         {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
         <button
+          className="signup-form-redirection"
           onClick={() => {
             setVisible(!visible);
           }}
