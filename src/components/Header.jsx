@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import logo from "../assets/logo-vinted.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ReactSlider from "react-slider";
+import { useNavigate } from "react-router-dom";
 
 const Header = (props) => {
   const {
@@ -12,9 +13,9 @@ const Header = (props) => {
     descending,
     setDescending,
     setSearch,
-    priceMinMax,
     setPriceMinMax,
   } = props;
+  const navigate = useNavigate();
 
   return (
     <header>
@@ -94,7 +95,18 @@ const Header = (props) => {
           </div>
         )}
 
-        <button className="bouton-bleu">Vends tes articles</button>
+        <button
+          className="bouton-bleu"
+          onClick={() => {
+            if (token) {
+              navigate("/publish");
+            } else {
+              setVisible(!visible);
+            }
+          }}
+        >
+          Vends tes articles
+        </button>
       </div>
     </header>
   );

@@ -6,6 +6,7 @@ import Cookies from "js-cookie";
 import Home from "./pages/Home";
 import Offer from "./pages/Offer";
 import Signup from "./pages/Signup";
+import Publish from "./pages/Publish";
 
 //Components
 import Header from "./components/Header";
@@ -47,7 +48,6 @@ const App = () => {
         descending={descending}
         setDescending={setDescending}
         setSearch={setSearch}
-        priceMinMax={priceMinMax}
         setPriceMinMax={setPriceMinMax}
       />
       {/* Le composant Routes doit contenir toutes mes Route il affiche un composant à la fois */}
@@ -75,6 +75,7 @@ const App = () => {
             />
           }
         />
+        <Route path="/publish" element={<Publish />} />
       </Routes>
       {visible && (
         <Modal
