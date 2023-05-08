@@ -41,6 +41,7 @@ const Header = (props) => {
           </div>
           <div className="toogle-and-slider">
             <label className="toggle">
+              Trier par prix :
               <input
                 className="toggle__input"
                 type="checkbox"
@@ -64,7 +65,7 @@ const Header = (props) => {
               )}
               pearling
               minDistance={5}
-              onChange={(value, index) => setPriceMinMax(value)}
+              onAfterChange={(value, index) => setPriceMinMax(value)}
             />
           </div>
         </div>

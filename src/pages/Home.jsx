@@ -69,7 +69,7 @@ const Home = (props) => {
                 />
                 <div className="price">{article.product_price} €</div>
                 <div className="taille-marque">{taille && taille.TAILLE}</div>
-                <div className="taille-marque">{marque.MARQUE}</div>
+                <div className="taille-marque">{marque && marque.MARQUE}</div>
               </article>
             </Link>
           );

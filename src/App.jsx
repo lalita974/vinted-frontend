@@ -28,7 +28,7 @@ const App = () => {
   const handleToken = (token) => {
     if (token) {
       setToken(token);
-      Cookies.set("tokenVinted", token, {});
+      Cookies.set("tokenVinted", token, { expires: 7, sameSite: "Strict" });
       setVisible(false);
     } else {
       setToken(null);
@@ -75,7 +75,7 @@ const App = () => {
             />
           }
         />
-        <Route path="/publish" element={<Publish />} />
+        <Route path="/publish" element={<Publish token={token} />} />
       </Routes>
       {visible && (
         <Modal
