@@ -21,11 +21,13 @@ const App = () => {
   const [token, setToken] = useState(Cookies.get("tokenVinted") || null);
   const [visible, setVisible] = useState(false);
   const [descending, setDescending] = useState(false);
+  const [search, setSearch] = useState("");
+  const [priceMinMax, setPriceMinMax] = useState([0, 250]);
 
   const handleToken = (token) => {
     if (token) {
       setToken(token);
-      Cookies.set("tokenVinted", token, { expires: 7 });
+      Cookies.set("tokenVinted", token, {});
       setVisible(false);
     } else {
       setToken(null);
@@ -44,11 +46,23 @@ const App = () => {
         setVisible={setVisible}
         descending={descending}
         setDescending={setDescending}
+        setSearch={setSearch}
+        priceMinMax={priceMinMax}
+        setPriceMinMax={setPriceMinMax}
       />
       {/* Le composant Routes doit contenir toutes mes Route il affiche un composant à la fois */}
       <Routes>
         {/* Pour chaque route, je précise son chemin et le composant qu'elle doit afficher */}
-        <Route path="/" element={<Home descending={descending} />} />
+        <Route
+          path="/"
+          element={
+            <Home
+              descending={descending}
+              search={search}
+              priceMinMax={priceMinMax}
+            />
+          }
+        />
         {/* Cette route attend un params dans son URL */}
         <Route path="/offer/:id" element={<Offer />} />
         <Route

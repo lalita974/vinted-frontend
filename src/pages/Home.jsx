@@ -6,20 +6,20 @@ import homePicture from "../assets/home-image.jpg";
 const Home = (props) => {
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
-  const { descending } = props;
+  const { descending, search, priceMinMax } = props;
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         if (descending) {
           let response = await axios.get(
-            "https://lereacteur-vinted-api.herokuapp.com/offers?sort=price-desc"
+            `https://lereacteur-vinted-api.herokuapp.com/offers?sort=price-desc&title=${search}&priceMin=${priceMinMax[0]}&priceMax=${priceMinMax[1]}`
           );
           setData(response.data);
           setIsLoading(false);
         } else {
           let response = await axios.get(
-            "https://lereacteur-vinted-api.herokuapp.com/offers?sort=price-asc"
+            `https://lereacteur-vinted-api.herokuapp.com/offers?sort=price-asc&title=${search}&priceMin=${priceMinMax[0]}&priceMax=${priceMinMax[1]}`
           );
           setData(response.data);
           setIsLoading(false);
@@ -29,7 +29,7 @@ const Home = (props) => {
       }
     };
     fetchData();
-  }, [descending]);
+  }, [descending, search, priceMinMax]);
 
   return isLoading ? (
     <span>En cours de chargement...</span>
