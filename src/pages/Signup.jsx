@@ -8,21 +8,18 @@ const Signup = (props) => {
   const [password, setPassword] = useState();
   const [newsletter, setNewsletter] = useState(false);
   const [errorMessage, setErrorMessage] = useState();
-  const { handleToken, visible, setVisible } = props;
+  const { handleToken, visible, setVisible, environnement } = props;
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post(
-        "https://lereacteur-vinted-api.herokuapp.com/user/signup",
-        {
-          email: email,
-          username: username,
-          password: password,
-          newsletter: newsletter,
-        }
-      );
+      const response = await axios.post(`${environnement}/user/signup`, {
+        email: email,
+        username: username,
+        password: password,
+        newsletter: newsletter,
+      });
       // console.log(response.data);
       if (response.data.token) {
         handleToken(response.data.token);

@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-const Offer = () => {
+const Offer = (props) => {
   const [data, setData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const { id } = useParams();
@@ -10,9 +10,7 @@ const Offer = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(
-          `https://lereacteur-vinted-api.herokuapp.com/offer/${id}`
-        );
+        const response = await axios.get(`${props.environnement}/offer/${id}`);
         setData(response.data);
         setIsLoading(false);
       } catch (error) {

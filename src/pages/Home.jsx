@@ -6,20 +6,20 @@ import homePicture from "../assets/home-image.jpg";
 const Home = (props) => {
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
-  const { descending, search, priceMinMax } = props;
+  const { descending, search, priceMinMax, environnement } = props;
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         if (descending) {
           let response = await axios.get(
-            `https://lereacteur-vinted-api.herokuapp.com/offers?sort=price-desc&title=${search}&priceMin=${priceMinMax[0]}&priceMax=${priceMinMax[1]}`
+            `${environnement}/offers?sort=price-desc&title=${search}&priceMin=${priceMinMax[0]}&priceMax=${priceMinMax[1]}`
           );
           setData(response.data);
           setIsLoading(false);
         } else {
           let response = await axios.get(
-            `https://lereacteur-vinted-api.herokuapp.com/offers?sort=price-asc&title=${search}&priceMin=${priceMinMax[0]}&priceMax=${priceMinMax[1]}`
+            `${environnement}/offers?sort=price-asc&title=${search}&priceMin=${priceMinMax[0]}&priceMax=${priceMinMax[1]}`
           );
           setData(response.data);
           setIsLoading(false);
@@ -44,7 +44,7 @@ const Home = (props) => {
       </div>
 
       <div className="affichage-home">
-        {data.offers.map((article) => {
+        {data.offers.map((article, index) => {
           const marque = article.product_details.find((elem) => elem.MARQUE);
           const taille = article.product_details.find((elem) => elem.TAILLE);
           return (
@@ -62,11 +62,15 @@ const Home = (props) => {
                   </div>
                   <div>{article.owner.account.username}</div>
                 </div>
-                <img
-                  className="offer-picture"
-                  src={article.product_pictures[0].secure_url}
-                  alt="article"
-                />
+                <div>
+                  {article.product_pictures && (
+                    <img
+                      className="offer-picture"
+                      src={article.product_pictures[0].secure_url}
+                      alt="article"
+                    />
+                  )}
+                </div>
                 <div className="price">{article.product_price} €</div>
                 <div className="taille-marque">{taille && taille.TAILLE}</div>
                 <div className="taille-marque">{marque && marque.MARQUE}</div>

@@ -7,6 +7,7 @@ import Home from "./pages/Home";
 import Offer from "./pages/Offer";
 import Signup from "./pages/Signup";
 import Publish from "./pages/Publish";
+import Payment from "./pages/Payment";
 
 //Components
 import Header from "./components/Header";
@@ -24,6 +25,7 @@ const App = () => {
   const [descending, setDescending] = useState(false);
   const [search, setSearch] = useState("");
   const [priceMinMax, setPriceMinMax] = useState([0, 250]);
+  const environnement = "https://lereacteur-vinted-api.herokuapp.com";
 
   const handleToken = (token) => {
     if (token) {
@@ -60,11 +62,15 @@ const App = () => {
               descending={descending}
               search={search}
               priceMinMax={priceMinMax}
+              environnement={environnement}
             />
           }
         />
         {/* Cette route attend un params dans son URL */}
-        <Route path="/offer/:id" element={<Offer />} />
+        <Route
+          path="/offer/:id"
+          element={<Offer environnement={environnement} />}
+        />
         <Route
           path="/signup"
           element={
@@ -72,16 +78,23 @@ const App = () => {
               handleToken={handleToken}
               visible={visible}
               setVisible={setVisible}
+              environnement={environnement}
             />
           }
         />
-        <Route path="/publish" element={<Publish token={token} />} />
+        <Route
+          path="/publish"
+          element={<Publish token={token} environnement={environnement} />}
+        />
+
+        <Route path="/payment" element={<Payment />} />
       </Routes>
       {visible && (
         <Modal
           handleToken={handleToken}
           visible={visible}
           setVisible={setVisible}
+          environnement={environnement}
         />
       )}
     </Router>

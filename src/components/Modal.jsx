@@ -7,19 +7,16 @@ const Modal = (props) => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [errorMessage, setErrorMessage] = useState();
-  const { handleToken, setVisible, visible } = props;
+  const { handleToken, setVisible, visible, environnement } = props;
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post(
-        "https://lereacteur-vinted-api.herokuapp.com/user/login",
-        {
-          email: email,
-          password: password,
-        }
-      );
+      const response = await axios.post(`${environnement}/user/login`, {
+        email: email,
+        password: password,
+      });
       //   console.log(response.data);
       if (response.data.token) {
         handleToken(response.data.token);

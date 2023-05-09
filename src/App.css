@@ -512,12 +512,6 @@ section {
   padding-top: 10px;
 }
 
-.file {
-  background-color: #fff;
-  margin: 20px 0;
-  border: 1px solid #999;
-}
-
 .bloc {
   background-color: #fff;
   margin: 20px 0;
@@ -535,6 +529,15 @@ section {
   width: 500px;
 }
 
+textarea {
+  border: none;
+  border-bottom: 1px solid #ebedee;
+  font-size: 14px;
+  font-family: FontVinted, sans-serif;
+  resize: none;
+  width: 500px;
+}
+
 .publish-button {
   display: flex;
   justify-content: flex-end;
@@ -547,4 +550,14 @@ section {
   color: #fff;
   margin: 50px 0;
   padding: 12px;
+}
+
+.checkbox {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  padding: 24px;
+  border-bottom: 1px solid #ebedee;
+  margin-right: 250px;
+  gap: 10px;
 }

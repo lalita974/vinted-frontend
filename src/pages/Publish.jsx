@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import { Navigate } from "react-router-dom";
 
 const Publish = (props) => {
   const [title, setTitle] = useState("");
@@ -10,7 +11,7 @@ const Publish = (props) => {
   const [brand, setBrand] = useState("");
   const [size, setSize] = useState("");
   const [color, setColor] = useState("");
-  const [file, setFile] = useState({});
+  const [picture, setPicture] = useState();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -24,9 +25,9 @@ const Publish = (props) => {
       formData.append("brand", brand);
       formData.append("size", size);
       formData.append("color", color);
-      formData.append("file", file);
+      formData.append("picture", picture);
       const response = await axios.post(
-        "https://lereacteur-vinted-api.herokuapp.com/offer/publish",
+        `${props.environnement}/offer/publish`,
         formData,
         {
           headers: {
@@ -40,18 +41,23 @@ const Publish = (props) => {
       console.log(error.message);
     }
   };
-  return (
+  return props.token ? (
     <section>
       <div className="publish-container">
         <h1>Vends ton article</h1>
         <form onSubmit={handleSubmit}>
-          <input
-            className="file"
-            type="file"
-            onChange={(event) => {
-              setFile(event.target.files[0]);
-            }}
-          />
+          <div className="bloc">
+            <label className="interieur-bloc">
+              Choisis une image
+              <input
+                style={{ display: "none" }}
+                type="file"
+                onChange={(event) => {
+                  setPicture(event.target.files[0]);
+                }}
+              />
+            </label>
+          </div>
           <div className="bloc">
             <label className="interieur-bloc">
               Titre
@@ -65,8 +71,7 @@ const Publish = (props) => {
             </label>
             <label className="interieur-bloc">
               Décris ton article
-              <input
-                type="text"
+              <textarea
                 placeholder="ex: Porté quelques fois, taille correctement"
                 onChange={(event) => {
                   setDescription(event.target.value);
@@ -137,6 +142,15 @@ const Publish = (props) => {
                 }}
               />
             </label>
+            <label className="checkbox">
+              <input
+                type="checkbox"
+                onChange={(event) => {
+                  setPrice(event.target.value);
+                }}
+              />
+              Je suis intéressé(e) par les échanges
+            </label>
           </div>
           <div className="publish-button">
             <button type="submit">Ajouter</button>
@@ -144,6 +158,8 @@ const Publish = (props) => {
         </form>
       </div>
     </section>
+  ) : (
+    <Navigate to="/login" />
   );
 };
 
