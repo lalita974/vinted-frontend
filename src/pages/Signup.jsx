@@ -8,7 +8,8 @@ const Signup = (props) => {
   const [password, setPassword] = useState();
   const [newsletter, setNewsletter] = useState(false);
   const [errorMessage, setErrorMessage] = useState();
-  const { handleToken, visible, setVisible, environnement } = props;
+  const { handleToken, visible, setVisible, environnement, handleUserId } =
+    props;
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
@@ -20,9 +21,10 @@ const Signup = (props) => {
         password: password,
         newsletter: newsletter,
       });
-      // console.log(response.data);
+      console.log(response.data);
       if (response.data.token) {
         handleToken(response.data.token);
+        handleUserId(response.data._id);
         navigate("/");
       }
     } catch (error) {

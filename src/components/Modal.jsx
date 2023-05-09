@@ -7,7 +7,8 @@ const Modal = (props) => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [errorMessage, setErrorMessage] = useState();
-  const { handleToken, setVisible, visible, environnement } = props;
+  const { handleToken, setVisible, visible, environnement, handleUserId } =
+    props;
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
@@ -20,6 +21,7 @@ const Modal = (props) => {
       //   console.log(response.data);
       if (response.data.token) {
         handleToken(response.data.token);
+        handleUserId(response.data._id);
         navigate("/");
       }
     } catch (error) {

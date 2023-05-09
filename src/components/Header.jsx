@@ -14,6 +14,7 @@ const Header = (props) => {
     setDescending,
     setSearch,
     setPriceMinMax,
+    handleUserId,
   } = props;
   const navigate = useNavigate();
 
@@ -76,6 +77,7 @@ const Header = (props) => {
               className="bouton-rouge"
               onClick={() => {
                 handleToken(null);
+                handleUserId(null);
               }}
             >
               Se déconnecter

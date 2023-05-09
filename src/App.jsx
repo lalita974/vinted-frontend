@@ -25,6 +25,8 @@ const App = () => {
   const [descending, setDescending] = useState(false);
   const [search, setSearch] = useState("");
   const [priceMinMax, setPriceMinMax] = useState([0, 250]);
+  const [userId, setUserId] = useState(Cookies.get("tokenId") || null);
+
   const environnement = "https://lereacteur-vinted-api.herokuapp.com";
 
   const handleToken = (token) => {
@@ -35,6 +37,17 @@ const App = () => {
     } else {
       setToken(null);
       Cookies.remove("tokenVinted");
+    }
+  };
+
+  const handleUserId = (userId) => {
+    if (userId) {
+      setUserId(userId);
+      Cookies.set("tokenId", userId, { expires: 7, sameSite: "Strict" });
+      setUserId(false);
+    } else {
+      setUserId(null);
+      Cookies.remove("tokenId");
     }
   };
 
@@ -51,6 +64,7 @@ const App = () => {
         setDescending={setDescending}
         setSearch={setSearch}
         setPriceMinMax={setPriceMinMax}
+        handleUserId={handleUserId}
       />
       {/* Le composant Routes doit contenir toutes mes Route il affiche un composant à la fois */}
       <Routes>
@@ -69,7 +83,14 @@ const App = () => {
         {/* Cette route attend un params dans son URL */}
         <Route
           path="/offer/:id"
-          element={<Offer environnement={environnement} />}
+          element={
+            <Offer
+              environnement={environnement}
+              visible={visible}
+              token={token}
+              setVisible={setVisible}
+            />
+          }
         />
         <Route
           path="/signup"
@@ -79,6 +100,7 @@ const App = () => {
               visible={visible}
               setVisible={setVisible}
               environnement={environnement}
+              handleUserId={handleUserId}
             />
           }
         />
@@ -87,7 +109,16 @@ const App = () => {
           element={<Publish token={token} environnement={environnement} />}
         />
 
-        <Route path="/payment" element={<Payment />} />
+        <Route
+          path="/payment"
+          element={
+            <Payment
+              token={token}
+              environnement={environnement}
+              userId={userId}
+            />
+          }
+        />
       </Routes>
       {visible && (
         <Modal
@@ -95,6 +126,7 @@ const App = () => {
           visible={visible}
           setVisible={setVisible}
           environnement={environnement}
+          handleUserId={handleUserId}
         />
       )}
     </Router>

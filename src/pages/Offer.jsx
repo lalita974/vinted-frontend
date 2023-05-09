@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useState, useEffect } from "react";
@@ -6,11 +7,14 @@ const Offer = (props) => {
   const [data, setData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const { id } = useParams();
+  const { environnement, visible, token, setVisible } = props;
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${props.environnement}/offer/${id}`);
+        const response = await axios.get(`${environnement}/offer/${id}`);
         setData(response.data);
         setIsLoading(false);
       } catch (error) {
@@ -18,7 +22,7 @@ const Offer = (props) => {
       }
     };
     fetchData();
-  }, [id, props.environnement]);
+  }, [id, environnement]);
 
   return isLoading ? (
     <p>Chargement en cours</p>
@@ -56,7 +60,23 @@ const Offer = (props) => {
               )}
               <p>{data.owner.account.username}</p>
             </div>
-            <button className="page-offer-button">Acheter</button>
+            <button
+              className="page-offer-button"
+              onClick={() => {
+                if (token) {
+                  navigate("/payment", {
+                    state: {
+                      title: data.product_name,
+                      price: data.product_price,
+                    },
+                  });
+                } else {
+                  setVisible(!visible);
+                }
+              }}
+            >
+              Acheter
+            </button>
           </div>
         </div>
       </div>
