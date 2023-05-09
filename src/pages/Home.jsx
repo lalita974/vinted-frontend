@@ -29,7 +29,7 @@ const Home = (props) => {
       }
     };
     fetchData();
-  }, [descending, search, priceMinMax]);
+  }, [descending, search, priceMinMax, environnement]);
 
   return isLoading ? (
     <span>En cours de chargement...</span>

@@ -18,14 +18,20 @@ const Offer = (props) => {
       }
     };
     fetchData();
-  }, [id]);
+  }, [id, props.environnement]);
 
   return isLoading ? (
     <p>Chargement en cours</p>
   ) : (
     <div className="page-offer">
       <div className="page-offer-container">
-        <img src={data.product_pictures[0].secure_url} alt="article" />
+        {data.product_pictures && (
+          <img
+            className="offer-picture"
+            src={data.product_pictures[0].secure_url}
+            alt="article"
+          />
+        )}
         <div className="page-offer-description">
           <div className="page-offer-description-bloc-1">
             <div className="page-offer-price">{data.product_price} €</div>
@@ -45,7 +51,7 @@ const Offer = (props) => {
             <h4>{data.product_name}</h4>
             <h5>{data.product_description}</h5>
             <div className="page-offer-owner">
-              {data.owner.account.avatar.secure_url && (
+              {data.owner.account.avatar && (
                 <img src={data.owner.account.avatar.secure_url} alt="pic" />
               )}
               <p>{data.owner.account.username}</p>
