@@ -7,10 +7,11 @@ const CheckoutForm = (props) => {
   const stripe = useStripe();
   const elements = useElements();
 
-  const [completed, setCompleted] = useState(false);
+  const [paymentStatus, setPaymentStatus] = useState(0); //0 paiement pas fait, 1 en attente de réponse, 2 paiement réussi; 3 échec de paiement
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setPaymentStatus(1);
     try {
       // On récupère ici les données bancaires que l'utilisateur rentre
       const cardElement = elements.getElement(CardElement);
@@ -33,10 +34,11 @@ const CheckoutForm = (props) => {
       console.log(response.data);
       // Si la réponse du serveur est favorable, la transaction a eu lieu
       if (response.data.status === "succeeded") {
-        setCompleted(true);
+        setPaymentStatus(2);
       }
     } catch (error) {
       console.log(error.response.data);
+      setPaymentStatus(3);
     }
   };
 
@@ -68,10 +70,20 @@ const CheckoutForm = (props) => {
             😍. Vous allez payer <span className="bold">{total} €</span> (frais
             de protection et frais de port inclus).
           </div>
-          <CardElement className="padding" />
-          {!completed && <button type="submit">Pay</button>}
-          {completed && (
-            <div className="padding">Le paiement a bien été effectué</div>
+          {paymentStatus === 2 ? (
+            <div className="padding">Le paiement a bien été effectué.</div>
+          ) : (
+            <div>
+              <CardElement className="padding" />
+              <button type="submit" disabled={paymentStatus === 1}>
+                Pay
+              </button>
+            </div>
+          )}
+          {paymentStatus === 3 && (
+            <p className="padding">
+              Une erreur est survenue, veuillez réessayer.
+            </p>
           )}
         </form>
       </div>

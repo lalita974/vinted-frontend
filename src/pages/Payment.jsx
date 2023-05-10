@@ -23,7 +23,7 @@ const Payment = (props) => {
       />
     </Elements>
   ) : (
-    <Navigate to="/login" />
+    <Navigate to="/" />
   );
 };
 

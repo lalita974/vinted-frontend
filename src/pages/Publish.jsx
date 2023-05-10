@@ -159,7 +159,7 @@ const Publish = (props) => {
       </div>
     </section>
   ) : (
-    <Navigate to="/login" />
+    <Navigate to="/" />
   );
 };
 
